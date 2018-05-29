@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+  <script>
+    window.$ = window.jQuery = require('jquery');
+    $(function(){
+      $("#header").load("header.html");
+    //  $("#footer").load("footer.html");
+    });
+  </script>
+</head>
+<body>
+  <div id="header"> </div>
+  <h1 class = "center"> INPUT </h1>
+  <p class = "" > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut rutrum magna,
+    eu porta augue. Aliquam erat volutpat. Sed non efficitur elit. Sed id libero consectetur,
+    porttitor ex vitae, dapibus nunc. Nunc massa leo, iaculis eu maximus ut, lobortis ac libero.
+    Vestibulum finibus id est vitae sollicitudin. Phasellus ullamcorper ornare lectus at scelerisque.
+    Vivamus scelerisque diam vel mi euismod imperdiet. Mauris at facilisis lorem, eget accumsan orci. </p>
+  <div class="row">
+      <div>
+        <form class="form-group input-form" id=myForm>
+            <label class="col-form-label" for="inputDefault" >Default input</label>
+            <input type="number"  name="inputData[]" class="form-control center-block" placeholder="Default input" id="inputDefault1" autofocus>
+            <label class="col-form-label" for="inputDefault">Default input</label>
+            <input type="number"  name="inputData[]" class="form-control center-block" placeholder="Default input" id="inputDefault2">
+            <button type="submit" id=subBtn class="btn btn-primary center-block submit-btn">Large button</button>
+        </form>
+        <div class="input-form">
+          <input name="result" class="form-control center-block" placeholder="Result" id="result"></input>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+   window.$ = window.jQuery = require('jquery');
+   const electron = require('electron');
+   const {ipcRenderer} = electron;
+
+    const form = document.querySelector('form');
+    form.addEventListener('submit', submitForm);
+
+  //const dropdownNavbar = $('#ddNavbar')[0];
+  //dropdownNavbar.addEventListener('click', dropdownPressed);
+
+  // Submit data from the
+    function submitForm(e) {
+        e.preventDefault();
+        const inputForm = $('input[name^=inputData]');
+        inputArray = inputForm.map(function(idx, elem) {
+              return parseFloat($(elem).val());
+            }).get();
+       // console.log(sum);
+        ipcRenderer.send('input:sum', inputArray);
+    }
+
+    function dropdownPressed(e){
+        e.preventDefault();
+        if ($('#navbarColor01')[0].style.display === 'none') {
+          $('#navbarColor01').show();
+        } else {
+          $('#navbarColor01').hide();
+        };
+
+    };
+
+    //Sum to screen
+    ipcRenderer.on('input:sum', function(e, sum){
+        $('input[name^=result]').val(sum);
+    });
+
+    </script>
+</body>

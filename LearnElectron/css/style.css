@@ -1,0 +1,34 @@
+.center {
+      position: relative;
+      margin-left: 5%;
+
+}
+
+.my-nav {
+      border-bottom-style: solid;
+      border-color: black;
+}
+
+.input-form{
+    padding: 25px;
+}
+
+.control-string{
+
+  margin-top: 2px;
+  margin-left: 20px;
+  margin-bottom: : 2px;
+  width: 80%;
+}
+
+.center-block {
+   margin-top:2px;
+   margin-bottom:2px;
+   margin-left:auto;
+   margin-right:auto;
+   display:block;
+}
+
+.submit-btn{
+  margin-top: 5px;
+}

@@ -1,0 +1,83 @@
+
+<head>
+  <link rel="stylesheet" href= node_modules\bootswatch\dist\solar\bootstrap.css>
+  <link rel="stylesheet" href= css\style.css>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary my-nav">
+    <a class="navbar-brand" href="#">Carbon footprint</a>
+  <!--     <button id=ddNavbar class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">-->
+    <div>
+       <button id=mainMenuDdBtn class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation" style="">
+         <span class="navbar-toggler-icon"></span>
+       </button>
+       <div id=mainMenuDd class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);">
+         <a class="dropdown-item" href="#">Action</a>
+         <a class="dropdown-item" href="#">Another action</a>
+         <div class="dropdown-divider"></div>
+         <a class="dropdown-item" href="#">Separated link</a>
+       </div>
+     </div>
+     <div class="collapse navbar-collapse " id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li id=inputLink class="nav-item ">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Input</a>
+              <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a>
+              </div>
+            </li>
+          <li id=efLink class="nav-item">
+            <a class="nav-link" href="#">Emission factors</a>
+          </li>
+          <li  id=measurementLink class="nav-item">
+            <a class="nav-link" href="#">Measurment</a>
+          </li>
+          <li id=reportLink class="nav-item">
+            <a class="nav-link" href="#">Report</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  <script type="text/javascript">
+
+  const mainMenuDdBtn = $("#mainMenuDdBtn");
+  mainMenuDdBtn.click(function(){
+        $('.collapse').toggle()
+      });
+
+  const inputLink = $('li#inputLink');
+  inputLink.click(loadNewPage);
+  const efLink = $('li#efLink');
+  efLink.click(loadNewPage);
+  const measurementLink = $('li#measurementLink');
+  measurementLink.click(loadNewPage);
+  const reportLink = $('li#reportLink');
+  reportLink.click(loadNewPage);
+
+  function loadNewPage(e){
+    e.preventDefault();
+    var newWin = '';
+    switch (this) {
+      case inputLink[0]:
+         newWin = 'inputWin.html';
+         break;
+      case efLink[0]:
+         newWin = 'mainWindow.html';
+         break;
+      case measurementLink[0]:
+           newWin = 'measurement';
+          break;
+      case reportLink[0]:
+           newWin = 'report';
+          break;
+      default:
+    };
+    ipcRenderer.send('load:newPage', newWin);
+  };
+  </script>
+
+
+</body>

@@ -1,0 +1,21 @@
+{
+  "name": "firstapp_bootswatch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Devegus",
+  "license": "ISC",
+  "dependencies": {
+    "bootswatch": "^4.1.1",
+    "electron": "^2.0.1",
+    "electron-twig": "^1.1.1",
+    "exceljs": "^1.4.6",
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "gulp-electron": "^0.1.3"
+  }
+}
