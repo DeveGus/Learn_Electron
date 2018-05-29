@@ -53,17 +53,13 @@ ipcMain.on('load:newPage',function(e,newWin){
 });
 
 ipcMain.on('input:readExcel',function(e){
-  var workbook = new Excel.Workbook();
-  workbook.xlsx.readFile('test.xlsx').then(function() {
-        var worksheet = workbook.getWorksheet(1);
-        var numOfRow = worksheet.rowCount;
-      
-        var row = worksheet.getRow
-        console.log();
+    var workbook = new Excel.Workbook();
+    workbook.xlsx.readFile('test.xlsx').then(function() {
+      var worksheet = workbook.getWorksheet('Foglio1');
+      var row = worksheet.getRow(1).value;
+      console.log(row);
+      });
     });
-
-});
-
 
 if(process.env.NODE_ENV !== 'production'){
   mainMenuTemplate.push({
