@@ -52,14 +52,45 @@ ipcMain.on('load:newPage',function(e,newWin){
   }));
 });
 
+var rawDataWorkbook = new Excel.Workbook();
+var report = rawDataWorkbook.addWorksheet('Report')
+// var reportWorkbook = new Excel.Workbook();
+// function createTable(){
+//   var rawData = rawDataWorkbook.getWorksheet(1);
+//   var timestampCol = rawData.getColumn(1).values;
+//   var statusCol  = rawData.getColumn(2).values;
+//   var valueCol = rawData.getColumn(3).values;
+//   report = [timestampCol, statusCol, valueCol];
+//   console.log(report);
+// }
 ipcMain.on('input:readExcel',function(e){
-    var workbook = new Excel.Workbook();
-    workbook.xlsx.readFile('test.xlsx').then(function() {
-      var worksheet = workbook.getWorksheet('Foglio1');
-      var row = worksheet.getRow(1).value;
-      console.log(row);
+    e.preventDefault();
+    rawDataWorkbook.xlsx.readFile('rawData.xlsx').then(function() {
+        var rawData = rawDataWorkbook.getWorksheet(1);
+        var timestampCol = rawData.getColumn(1).values;
+        var statusCol  = rawData.getColumn(2).values;
+        var valueCol = rawData.getColumn(3).values;
+        report = [timestampCol, statusCol, valueCol];
+        // console.log(report);
+        var i = 1;
+        var toRemove = []
+        report[1].forEach(function(row){;
+               if (row == 'R') {
+            toRemove.push(i);
+          }
+          i++;
+        });
+        console.log(toRemove);
       });
+    // reportWorkbook = createAndFillWorkbook();
+    // reportWorkbook.xlsx.writeFile('rawData.xlsx')
+    //     .then(function() {
+    //         reportWorkbook.addWorksheet('report');
+    //     });
+
+
     });
+
 
 if(process.env.NODE_ENV !== 'production'){
   mainMenuTemplate.push({
