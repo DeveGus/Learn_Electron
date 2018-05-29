@@ -53,43 +53,32 @@ ipcMain.on('load:newPage',function(e,newWin){
 });
 
 var rawDataWorkbook = new Excel.Workbook();
-var report = rawDataWorkbook.addWorksheet('Report')
-// var reportWorkbook = new Excel.Workbook();
-// function createTable(){
-//   var rawData = rawDataWorkbook.getWorksheet(1);
-//   var timestampCol = rawData.getColumn(1).values;
-//   var statusCol  = rawData.getColumn(2).values;
-//   var valueCol = rawData.getColumn(3).values;
-//   report = [timestampCol, statusCol, valueCol];
-//   console.log(report);
+
+// function table(){timestampCol
+//   this.timestampCol
+//   this.
+//   this.
 // }
+
 ipcMain.on('input:readExcel',function(e){
-    e.preventDefault();
+    e.preventDefault()
     rawDataWorkbook.xlsx.readFile('rawData.xlsx').then(function() {
-        var rawData = rawDataWorkbook.getWorksheet(1);
-        var timestampCol = rawData.getColumn(1).values;
-        var statusCol  = rawData.getColumn(2).values;
-        var valueCol = rawData.getColumn(3).values;
-        report = [timestampCol, statusCol, valueCol];
-        // console.log(report);
-        var i = 1;
-        var toRemove = []
-        report[1].forEach(function(row){;
-               if (row == 'R') {
-            toRemove.push(i);
-          }
+        var rawData = rawDataWorkbook.getWorksheet(1)
+        var timestampCol = rawData.getColumn(1).values
+        var statusCol  = rawData.getColumn(2).values
+        var valueCol = rawData.getColumn(3).values
+        var dataTable = []
+        var i = 2
+        console.log(timestampCol[i], statusCol[i], valueCol[i])
+        statusCol.forEach(function(row){;
+          if (row == 'M') {
+            dataTable.push([timestampCol[i], statusCol[i], valueCol[i]]);
+            }
           i++;
-        });
-        console.log(toRemove);
+          });
+
       });
-    // reportWorkbook = createAndFillWorkbook();
-    // reportWorkbook.xlsx.writeFile('rawData.xlsx')
-    //     .then(function() {
-    //         reportWorkbook.addWorksheet('report');
-    //     });
-
-
-    });
+  });
 
 
 if(process.env.NODE_ENV !== 'production'){
