@@ -52,12 +52,16 @@ ipcMain.on('load:newPage',function(e,newWin){
   }));
 });
 
-ipcMain.on('input:readExcel',function(e,inputArray){
-var workbook = new Excel.Workbook();
-workbook.xlsx.readFile('test.xlsx')
-    .then(function() {
-        console.log(workbook);
+ipcMain.on('input:readExcel',function(e){
+  var workbook = new Excel.Workbook();
+  workbook.xlsx.readFile('test.xlsx').then(function() {
+        var worksheet = workbook.getWorksheet(1);
+        var numOfRow = worksheet.rowCount;
+      
+        var row = worksheet.getRow
+        console.log();
     });
+
 });
 
 

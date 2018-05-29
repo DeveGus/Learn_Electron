@@ -21,3 +21,13 @@ function submitForm(e) {
 ipcRenderer.on('input:sum', function(e, sum){
     $('input[name^=result]').val(sum);
 });
+
+const readExcelBtn = $('#excelBtn');
+readExcelBtn.click(readExcel);
+
+function readExcel(e){
+  e.preventDefault();
+  // const pathInput = $('#pathInput');
+  // var path = pathInput.val();
+  ipcRenderer.send('input:readExcel');
+};
