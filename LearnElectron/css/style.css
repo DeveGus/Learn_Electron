@@ -2,9 +2,14 @@
     position: fixed-top;
 }
 
+.on-the-line{
+  display: inline-block;
+}
+
 .center {
       position: relative;
       margin-left: 5%;
+      margin-right: 5%;
 
 }
 

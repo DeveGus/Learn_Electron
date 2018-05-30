@@ -45,8 +45,10 @@ process.on('uncaughtException', function (error) {
   // console.log(error.message);
     switch (error.message) {
       case "Cannot read property '0' of undefined":
-        console.log('error path not valid');
+        console.log('error: path not valid');
         break;
+      case "path must be a string or Buffer":
+        console.log('error: path not valid');
       default:
     };
 });
@@ -73,6 +75,7 @@ ipcMain.on('inputFile:path',function(e,excelPath){
                   { name: 'All Files', extensions: ['*'] }],
         properties: ['openFile']
       })[0];
+    mainWindow.webContents.send('inputFile:choosePath',rawDataPath)
 });
 // catch input:readExcel, read excelPath file
 var rawDataWorkbook = new Excel.Workbook();

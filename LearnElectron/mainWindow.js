@@ -19,10 +19,13 @@ function submitForm(e) {
     }).get();
   ipcRenderer.send('input:sum', inputArray);
 }
-//Show the value received from main.js
-ipcRenderer.on('input:sum', function(e, sum){
-    $('input[name^=result]').val(sum);
+//Show the excel file path received from main.js
+ipcRenderer.on('inputFile:choosePath', function(e, rawDataPath){
+    var parseArray = rawDataPath.split("");
+    console.log(parseArray);
+    $('#resultInputFile').text(rawDataPath);
 });
+
 
 const inputFileBtn = $('#inputFileBtn')
 inputFileBtn.click(browseInputFile);
