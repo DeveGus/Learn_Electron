@@ -7,6 +7,8 @@ const dialog = require('electron').dialog;
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
 var rawDataPath
+var pumpsPath
+var constGases = [1, 2, 3, 4, 5];
 
 let mainWindow
 
@@ -55,8 +57,8 @@ process.on('uncaughtException', function (error) {
 
 //catch input:sum
 ipcMain.on('input:sum',function(e,inputArray){
-  const sum = inputArray.reduce(function(acc, val) {return acc + val; });
-  mainWindow.webContents.send('input:sum',sum)
+  constGases = inputArray;
+  console.log(constGases);
 });
 // catch load:newPage
 ipcMain.on('load:newPage',function(e,newWin){
@@ -68,18 +70,29 @@ ipcMain.on('load:newPage',function(e,newWin){
 });
 
 //Catch inputFile:path, open a browse window in the local file sustem to choose the raw data .xlsx file
-ipcMain.on('inputFile:path',function(e,excelPath){
+ipcMain.on('readExcel:rawDataPath',function(e){
     e.preventDefault();
+    // console.log(fileToOpen);
     rawDataPath = dialog.showOpenDialog({
         filters: [{ name: 'Excel', extensions: ['xlsx'] },
                   { name: 'All Files', extensions: ['*'] }],
         properties: ['openFile']
       })[0];
-    mainWindow.webContents.send('inputFile:choosePath',rawDataPath)
+    mainWindow.webContents.send('readExcel:rawDataChosenPath', rawDataPath)
 });
-// catch input:readExcel, read excelPath file
+//Catch inputFile:path, open a browse window in the local file sustem to choose the raw data .xlsx file
+ipcMain.on('readExcel:pumpsPath',function(e){
+    e.preventDefault();
+      pumpsPath = dialog.showOpenDialog({
+        filters: [{ name: 'Excel', extensions: ['xlsx'] },
+                  { name: 'All Files', extensions: ['*'] }],
+        properties: ['openFile']
+      })[0];
+    mainWindow.webContents.send('readExcel:pumpsChosenPath', pumpsPath)
+});
+// catch readExcel:rawData, read excelPath file
 var rawDataWorkbook = new Excel.Workbook();
-ipcMain.on('input:readExcel',function(e){
+ipcMain.on('readExcel:rawData',function(e){
     e.preventDefault()
     rawDataWorkbook.xlsx.readFile(rawDataPath).then(function() {
         var rawData = rawDataWorkbook.getWorksheet(1)
@@ -91,13 +104,20 @@ ipcMain.on('input:readExcel',function(e){
         var i = 2
         statusCol.forEach(function(row){;
           if (row == 'M') {
-            dataTable.push([timestampCol[i], statusCol[i], valueCol[i]]);
+            dataTable.push([timestampCol[i], statusCol[i], valueCol[i]*constGases[1]]);
             }
           i++;
-          });
-
+        });
+        console.log(dataTable[100]);
       });
   });
+
+  // catch readExcel:readExcel, read excelPath file
+  var rawDataWorkbook = new Excel.Workbook();
+  ipcMain.on('readExcel:pumps',function(e){
+      e.preventDefault()
+        console.log('pumps');
+        });
 
 
 if(process.env.NODE_ENV !== 'production'){

@@ -2,10 +2,6 @@ window.$ = window.jQuery = require('jquery');
 const electron = require('electron');
 const {ipcRenderer} = electron;
 
-//--------- HEADER
-
-
-
 //------- MAIN WINDOW
 //Submit data in the form
 const form = $('#myForm');
@@ -19,23 +15,44 @@ function submitForm(e) {
     }).get();
   ipcRenderer.send('input:sum', inputArray);
 }
-//Show the excel file path received from main.js
-ipcRenderer.on('inputFile:choosePath', function(e, rawDataPath){
-    var parseArray = rawDataPath.split("");
-    console.log(parseArray);
-    $('#resultInputFile').text(rawDataPath);
-});
 
-
-const inputFileBtn = $('#inputFileBtn')
-inputFileBtn.click(browseInputFile);
-function browseInputFile(e){
+// Browse to raw data file path
+const rawDataBrowseBtn = $('#rawDataBrowseBtn')
+rawDataBrowseBtn.click(rawDataBrowseFile);
+function rawDataBrowseFile(e){
   e.preventDefault()
-  ipcRenderer.send('inputFile:path')
-}
-const readExcelBtn = $('#excelBtn');
-readExcelBtn.click(readExcel);
-function readExcel(e){
+  console.log('merda');
+  ipcRenderer.send('readExcel:rawDataPath')
+  }
+
+const pumpsBrowseBtn = $('#pumpsBrowseBtn')
+pumpsBrowseBtn.click(pumpsBrowseFile);
+function pumpsBrowseFile(e){
+    e.preventDefault()
+    console.log('pumps');
+    ipcRenderer.send('readExcel:pumpsPath')
+  }
+
+//Show the excel file path received from main.js
+const rawDataPathOutput = $('#rawDataPathOutput');
+const pumpsPathOutput = $('#pumpsPathOutput');
+ipcRenderer.on('readExcel:rawDataChosenPath', function(e, filePath){
+      rawDataPathOutput.val(filePath);
+    });
+ipcRenderer.on('readExcel:pumpsChosenPath', function(e, filePath){
+      pumpsPathOutput.val(filePath);
+    });
+//Upload file
+const rawDataUploadBtn = $('#rawDataUploadBtn');
+rawDataUploadBtn.click(readRawDataExcel);
+function readRawDataExcel(e){
   e.preventDefault();
-  ipcRenderer.send('input:readExcel');
+  ipcRenderer.send('readExcel:rawData');
+};
+const pumpsUploadBtn = $('#pumpsUploadBtn');
+pumpsUploadBtn.click(pumpsDataExcel);
+function pumpsDataExcel(e){
+  e.preventDefault();
+  pumpsPath =  $('#pumpsPathOutput').value;
+  ipcRenderer.send('readExcel:pumps');
 };

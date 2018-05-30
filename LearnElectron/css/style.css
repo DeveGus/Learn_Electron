@@ -6,11 +6,19 @@
   display: inline-block;
 }
 
+.path-output{
+  width:60%;
+}
+
+
+.browse-choose-btn{
+    width: 40%;
+}
+
 .center {
       position: relative;
       margin-left: 5%;
       margin-right: 5%;
-
 }
 
 .my-nav {

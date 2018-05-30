@@ -10,46 +10,120 @@
 </head>
 <body>
   <div id="header"> </div>
-  <h1 class = "center page-title"> LOREM IPSUM </h1>
-  <p class = "center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut rutrum magna,
-    eu porta augue. Aliquam erat volutpat. Sed non efficitur elit. Sed id libero consectetur,
-    porttitor ex vitae, dapibus nunc. Nunc massa leo, iaculis eu maximus ut, lobortis ac libero.
-    Vestibulum finibus id est vitae sollicitudin. Phasellus ullamcorper ornare lectus at scelerisque.
-    Vivamus scelerisque diam vel mi euismod imperdiet. Mauris at facilisis lorem, eget accumsan orci.
-  </p>
-  <div class="form-group center">
-    <div class="input-group mb-3">
-      <div class="custom-file">
-        <input type="button" class="custom-file-input btn-primary" id="inputFileBtn">
-        <label id="resultInputFile" class="custom-file-label" for="inputFileBtn">Choose file</label>
+  <div class="container">
+
+    <div class="row">
+      <h1 class = "center page-title"> LOREM IPSUM </h1>
+      <p > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut rutrum magna,
+        eu porta augue. Aliquam erat volutpat. Sed non efficitur elit. Sed id libero consectetur,
+        porttitor ex vitae, dapibus nunc. Nunc massa leo, iaculis eu maximus ut, lobortis ac libero.
+        Vestibulum finibus id est vitae sollicitudin. Phasellus ullamcorper ornare lectus at scelerisque.
+        Vivamus scelerisque diam vel mi euismod imperdiet. Mauris at facilisis lorem, eget accumsan orci.
+      </p>
+    </div>
+
+    <div class="row form-group center ">
+      <div class="input-group mb-3">
+        <div class="col-3 custom-file">
+          <input id="rawDataBrowseBtn" type="button" class="custom-file-input">
+          <label class="custom-file-label" for="rawDataBrowseBtn">Choose raw data file</label>
+        </div>
+        <div class="col-9 input-group-append">
+          <span id=rawDataUploadBtn class="input-group-text " >Upload</span>
+          <input  id="rawDataPathOutput" type="text" class="form-control" placeholder="Path" >
+        </div>
       </div>
-      <div class="input-group-append">
-        <span id=excelBtn class="input-group-text" id="">Upload</span>
+
+      <div class="input-group mb-3">
+        <div class="col-3 custom-file">
+          <input id="pumpsBrowseBtn" type="button" class="custom-file-input">
+          <label class="custom-file-label" for="pumpsBrowseBtn">Choose pumps data file</label>
+        </div>
+        <div class="col-9 input-group-append">
+          <span id=pumpsUploadBtn class="input-group-text " >Upload</span>
+          <input  id="pumpsPathOutput" type="text" class="form-control" placeholder="Path" >
+        </div>
       </div>
     </div>
-  </div>
+  <!-- </div>
+    <div class="row-9 center "> -->
 
-  <!-- <div class="center-block on the-line">
-    <button id="inputFileBtn" class="btn btn-primary center-block submit-btn">Search raw data file</button>
-    <input id="resultInputFile" name="result" class=" center-block" placeholder="Result"></input>
-    <button id=excelBtn type="button" class="btn btn-primary center-block submit-btn">Read excel</button>
-  </div> -->
-  <div  class="input-form">
+
+
+
     <div   class="row">
-      <form class="form-group input-form" id=myForm>
+
+    <div  class="input-form center" >
+      <form id=myForm class="form-group input-form">
         <label class="col-form-label" for="inputDefault1" >N2O</label>
-        <input type="number" id="inputDefault1" name="inputData[]" class="form-control center-block" placeholder="Default input"  autofocus>
+        <input type="number" step="0.000001" id="inputDefault1" name="inputData[]" class="form-control center-block" placeholder="Default input"  autofocus>
         <label class="col-form-label" for="inputDefault2">CH4</label>
-        <input type="number" id="inputDefault2" name="inputData[]" class="form-control center-block" placeholder="Default input" >
+        <input type="number" step="0.000001" id="inputDefault2" name="inputData[]" class="form-control center-block" placeholder="Default input" >
         <label class="col-form-label" for="inputDefault3" >CO2</label>
-        <input type="number" id="inputDefault3" name="inputData[]" class="form-control center-block" placeholder="Default input" autofocus>
+        <input type="number" step="0.000001" id="inputDefault3" name="inputData[]" class="form-control center-block" placeholder="Default input" autofocus>
         <label class="col-form-label" for="inputDefault4" >NO</label>
-        <input type="number"  id="inputDefault4" name="inputData[]" class="form-control center-block" placeholder="Default input" autofocus>
+        <input type="number" step="0.000001" id="inputDefault4" name="inputData[]" class="form-control center-block" placeholder="Default input" autofocus>
         <label class="col-form-label" for="inputDefault5" >NO2</label>
-        <input type="number" id="inputDefault5" name="inputData[]" class="form-control center-block" placeholder="Default input"  autofocus>
-        <button type="submit" id=subBtn class="btn btn-primary center-block submit-btn">Large button</button>
+        <input type="number" step="0.000001" id="inputDefault5" name="inputData[]" class="form-control center-block" placeholder="Default input"  autofocus>
+        <button type="submit" id=subBtn class="btn btn-primary center-block submit-btn">Confirm</button>
       </form>
     </div>
+
+    <div class="input-form center">
+      <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active show" data-toggle="tab">N2O</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab">CH4</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab">CO2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab">CO</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab">NO2</a>
+          </li>
+      </ul>
+      <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade active show" id="home">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Type</th>
+                <th scope="col">Column heading</th>
+                <th scope="col">Column heading</th>
+                <th scope="col">Column heading</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-active">
+                <th scope="row">Active</th>
+                <td>Column content</td>
+                <td>Column content</td>
+                <td>Column content</td>
+              </tr>
+              <tr>
+                <th scope="row">Default</th>
+                <td>Column content</td>
+                <td>Column content</td>
+                <td>Column content</td>
+              </tr>
+              <tr class="table-primary">
+                <th scope="row">Primary</th>
+                <td>Column content</td>
+                <td>Column content</td>
+                <td>Column content</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
   </div>
   <script src=mainWindow.js >  </script>
 </body>
