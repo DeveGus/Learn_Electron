@@ -2,8 +2,11 @@ const electron = require('electron');
 const path = require('path');
 const url = require('url');
 const Excel = require('exceljs');
+const dialog = require('electron').dialog;
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
+
+var rawDataPath
 
 let mainWindow
 
@@ -38,6 +41,16 @@ const mainMenuTemplate = [
   }
 ];
 
+process.on('uncaughtException', function (error) {
+  // console.log(error.message);
+    switch (error.message) {
+      case "Cannot read property '0' of undefined":
+        console.log('error path not valid');
+        break;
+      default:
+    };
+});
+
 //catch input:sum
 ipcMain.on('input:sum',function(e,inputArray){
   const sum = inputArray.reduce(function(acc, val) {return acc + val; });
@@ -52,24 +65,27 @@ ipcMain.on('load:newPage',function(e,newWin){
   }));
 });
 
+//Catch inputFile:path, open a browse window in the local file sustem to choose the raw data .xlsx file
+ipcMain.on('inputFile:path',function(e,excelPath){
+    e.preventDefault();
+    rawDataPath = dialog.showOpenDialog({
+        filters: [{ name: 'Excel', extensions: ['xlsx'] },
+                  { name: 'All Files', extensions: ['*'] }],
+        properties: ['openFile']
+      })[0];
+});
+// catch input:readExcel, read excelPath file
 var rawDataWorkbook = new Excel.Workbook();
-
-// function table(){timestampCol
-//   this.timestampCol
-//   this.
-//   this.
-// }
-
 ipcMain.on('input:readExcel',function(e){
     e.preventDefault()
-    rawDataWorkbook.xlsx.readFile('rawData.xlsx').then(function() {
+    rawDataWorkbook.xlsx.readFile(rawDataPath).then(function() {
         var rawData = rawDataWorkbook.getWorksheet(1)
+        console.log(rawData.getRow(2).values);
         var timestampCol = rawData.getColumn(1).values
         var statusCol  = rawData.getColumn(2).values
         var valueCol = rawData.getColumn(3).values
         var dataTable = []
         var i = 2
-        console.log(timestampCol[i], statusCol[i], valueCol[i])
         statusCol.forEach(function(row){;
           if (row == 'M') {
             dataTable.push([timestampCol[i], statusCol[i], valueCol[i]]);

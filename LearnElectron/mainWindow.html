@@ -10,30 +10,33 @@
 </head>
 <body>
   <div id="header"> </div>
-  <h1 class = "center"> LOREM IPSUM </h1>
+  <h1 class = "center page-title"> LOREM IPSUM </h1>
   <p class = "" > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut rutrum magna,
     eu porta augue. Aliquam erat volutpat. Sed non efficitur elit. Sed id libero consectetur,
     porttitor ex vitae, dapibus nunc. Nunc massa leo, iaculis eu maximus ut, lobortis ac libero.
     Vestibulum finibus id est vitae sollicitudin. Phasellus ullamcorper ornare lectus at scelerisque.
     Vivamus scelerisque diam vel mi euismod imperdiet. Mauris at facilisis lorem, eget accumsan orci. </p>
-  <div class="row">
+  <div   class="row">
+      <div class="input-form">
+        <button id="inputFileBtn" class="btn btn-primary center-block submit-btn">Search raw data file</button>
+        <input name="result" class="form-control center-block" placeholder="Result" id="result"></input>
+        <button type="button" id=excelBtn class="btn btn-primary center-block submit-btn">Read excel</button>
+      </div>
       <div>
         <form class="form-group input-form" id=myForm>
-            <label class="col-form-label" for="inputDefault" >Default input</label>
-            <input type="number"  name="inputData[]" class="form-control center-block" placeholder="Default input" id="inputDefault1" autofocus>
-            <label class="col-form-label" for="inputDefault">Default input</label>
-            <input type="number"  name="inputData[]" class="form-control center-block" placeholder="Default input" id="inputDefault2">
-            <button type="submit" id=subBtn class="btn btn-primary center-block submit-btn">Large button</button>
+          <label class="col-form-label" for="inputDefault1" >N2O</label>
+          <input type="number" id="inputDefault1" name="inputData[]" class="form-control center-block" placeholder="Default input"  autofocus>
+          <label class="col-form-label" for="inputDefault2">CH4</label>
+          <input type="number" id="inputDefault2" name="inputData[]" class="form-control center-block" placeholder="Default input" >
+          <label class="col-form-label" for="inputDefault3" >CO2</label>
+          <input type="number" id="inputDefault3" name="inputData[]" class="form-control center-block" placeholder="Default input" autofocus>
+          <label class="col-form-label" for="inputDefault4" >NO</label>
+          <input type="number"  id="inputDefault4" name="inputData[]" class="form-control center-block" placeholder="Default input" autofocus>
+          <label class="col-form-label" for="inputDefault5" >NO2</label>
+          <input type="number" id="inputDefault5" name="inputData[]" class="form-control center-block" placeholder="Default input"  autofocus>
+          <button type="submit" id=subBtn class="btn btn-primary center-block submit-btn">Large button</button>
         </form>
-        <div class="input-form">
-          <input name="result" class="form-control center-block" placeholder="Result" id="result"></input>
-        </div>
-        <div class="input-form">
-          <!---<input id=pathInput type="file" class="form-control center-block" placeholder="Result" ></input>-->
-          <button type="button" id=excelBtn class="btn btn-primary center-block submit-btn">Read excel</button>
-        </div>
       </div>
     </div>
-  </div>
   <script src=mainWindow.js >  </script>
 </body>

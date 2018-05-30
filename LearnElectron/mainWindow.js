@@ -4,6 +4,8 @@ const {ipcRenderer} = electron;
 
 //--------- HEADER
 
+
+
 //------- MAIN WINDOW
 //Submit data in the form
 const form = $('#myForm');
@@ -22,12 +24,15 @@ ipcRenderer.on('input:sum', function(e, sum){
     $('input[name^=result]').val(sum);
 });
 
+const inputFileBtn = $('#inputFileBtn')
+inputFileBtn.click(browseInputFile);
+function browseInputFile(e){
+  e.preventDefault()
+  ipcRenderer.send('inputFile:path')
+}
 const readExcelBtn = $('#excelBtn');
 readExcelBtn.click(readExcel);
-
 function readExcel(e){
   e.preventDefault();
-  // const pathInput = $('#pathInput');
-  // var path = pathInput.val();
   ipcRenderer.send('input:readExcel');
 };
